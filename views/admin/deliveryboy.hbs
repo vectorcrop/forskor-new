@@ -1,0 +1,81 @@
+
+<style>
+  .btn {
+    text-decoration: none;
+  }
+  a:link { text-decoration: none; }
+
+
+</style>
+
+<br><br><br>
+<div class="container">
+        <div class="card">
+          <div class="card-body direction-rtl">
+            <!-- Search Form Wrapper-->
+            {{!-- <div class="search-form-wrapper">
+              <form class="mb-3 pb-4" action="#">
+                <div class="input-group">
+                  <input class="form-control form-control-clicked" type="search" value="Affan template">
+                  <button class="btn btn-dark" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+              </form>
+            </div> --}}
+            <!-- Single Search Result-->
+                              {{#each orders}}
+            <div class="single-search-result mb-3">
+              <a href="/bigwig/view-ordered-products/{{this._id}}">
+              <img class="img-circle mb-2" style="width: 20%;" src="img/icons/man.png" alt="">
+              <h6 class="text-truncate mb-1">Order Id - {{this.orderId}}</h6><h5>Date : {{#getDate this.date}}{{/getDate}} | {{#getTime this.date}}{{/getTime}}</h5>
+              <p class="mb-0">Customer Name – {{this.deliveryDetails.name}}</p>
+              </a>
+             {{#ifeq this.status "dispatched"}}
+                  <a href="/bigwig/change-status/?status=picked&orderId={{this._id}}" class="btn btn-sm btn-dark mt-3">Picked</a>  
+                  {{/ifeq}}
+
+                   {{#ifeq this.status "picked"}}
+                  <a  href="/bigwig/change-status/?status=delivered&orderId={{this._id}}" class="btn btn-sm btn-primary mt-3">Delivered</a>  
+                  {{/ifeq}}
+
+                  
+                  <a href="/bigwig/view-ordered-products/{{this._id}}" class="btn btn-sm btn-danger mt-3">View items</a>
+                  <br>
+                  <hr>
+                      {{/each}}
+            </div>
+           
+
+            <!-- Pagination-->
+        
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<script>
+  const socket = io();
+
+  socket.on("status-dispatched", (order) => {
+    addRow(order)
+  });
+  socket.on("status-picked", (order) => {
+    addRow(order)
+  });
+  socket.on("status-delivered", (order) => {
+    addRow(order)
+  })
+
+</script>

@@ -1,0 +1,596 @@
+<style>
+  .owl-carousel .owl-item img {
+    display: block;
+    width: 50%;
+  }
+
+  .my {
+    width: 350px;
+    max-width: 100%;
+    padding-top: 150px;
+    font-size: .875rem;
+    pointer-events: auto;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .1);
+    -webkit-box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+    border-radius: 0.25rem;
+    background-color: #2ecc4a !important;
+    color: #ffffff;
+  }
+
+  .textreducer {
+    display: inline-block;
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+  }
+
+  .card-body {
+    padding: 0.8rem;
+  }
+
+  .bg-warning {
+    background-color: #00000069 !important;
+  }
+
+  .text-dark {
+    color: #ffffff !important;
+  }
+
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    -webkit-animation-name: fadeIn;
+    /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+  }
+
+  /* Modal Content */
+  .modal-content {
+    position: fixed;
+    bottom: 0;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+  }
+
+  /* The Close Button */
+  .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+
+  .modal-body {
+    padding: 2px 16px;
+  }
+
+  .modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+  }
+
+  /* Add Animation */
+  @-webkit-keyframes slideIn {
+    from {
+      bottom: -300px;
+      opacity: 0
+    }
+
+    to {
+      bottom: 0;
+      opacity: 1
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      bottom: -300px;
+      opacity: 0
+    }
+
+    to {
+      bottom: 0;
+      opacity: 1
+    }
+  }
+
+  @-webkit-keyframes fadeIn {
+    from {
+      opacity: 0
+    }
+
+    to {
+      opacity: 1
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0
+    }
+
+    to {
+      opacity: 1
+    }
+  }
+
+
+  .modal-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 30px;
+  }
+
+  .modal-heading h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .modal-heading h3 {
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0;
+  }
+
+
+  .card1 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ffffff;
+    border-radius: 50px;
+    background-color: #EAEAEA;
+    margin-bottom: 5px;
+  }
+
+  .card1 img {
+    width: 40px;
+    height: auto;
+    margin-right: 20px;
+  }
+
+  .card-text {
+    flex: 1;
+  }
+
+  .card-text h2 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .card-text p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.5;
+  }
+
+
+  .modal-footer {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+  }
+
+  .black-button {
+    padding: 10px 145px;
+    border: none;
+    border-radius: 130px;
+    font-size: 16px;
+    margin-bottom: 75px;
+    margin-top: 10px;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+  }
+
+  .modal-content {
+    position: fixed;
+    bottom: 0;
+    background-color: #205e54;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s;
+  }
+</style>
+<div class="loader-wrapper">
+  <div class="loader">
+    <div class="loading-text">
+      <img src="img/icons/indro.png">
+    </div><!-- .loading-text -->
+  </div><!-- .loader -->
+</div><!-- .loader-wrapper -->
+<br>
+<div class="page-content-wrapper ">
+
+  <!-- Hero Slides-->
+  <div class="owl-carousel  owl-theme" id="hero-carousel">
+    <!-- Single Hero Slide-->
+
+    {{#each banners}}
+    <!-- Single Hero Slide-->
+    <div class="container">
+      <div class="card card-bg-img bg-img bg-overlay"
+        style="background-image: url('/images/banner-images/{{this._id}}.png')">
+        <div class="card-body p-5 direction-rtl">
+          <center>
+            <h5 class="text-white font-weight-bold mb-3">{{#getTitleCase this.Name}}{{/getTitleCase}}</h5>
+            <a class="btn btn-warning" href="/{{this.Path}}">View More</a>
+          </center>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <!-- Welcome Toast-->
+  {{#if signInSucc}}
+  <div class="toast toast-autohide custom-toast-1 toast-success home-page-toast" role="alert" aria-live="assertive"
+    aria-atomic="true" data-bs-delay="10000" data-bs-autohide="true">
+    <div class="toast-body">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check2-circle"
+        viewBox="0 0 16 16">
+        <path
+          d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
+        <path
+          d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
+      </svg>
+      <div class="toast-text ms-3 me-2">
+        <p class="mb-1 text-white">{{signInSucc}}</p><small class="d-block"></small>
+      </div>
+      <button class="btn btn-close btn-close-white position-relative p-1 ms-auto" type="button" data-bs-dismiss="toast"
+        aria-label="Close"></button>
+    </div>
+  </div>
+  {{/if}}
+
+
+  <div class="container">
+    <div class="container">
+      <div class="col-xs-12 col-md-6 col-sm-8 col-lg-12 center-block">
+        <br>
+        <h5><b>Top Categories</b><span class="pull-right">
+            <a href="/menu" type="button" class="btn btn-primary btn-small" name="submit" id="submit">View
+              More</a></span></h5>
+        <br>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="container">
+    <div class="owl-carousel owl-theme" id="menu-carousel">
+      {{#each category}}
+      <!-- Single Image Gallery-->
+      <a href="/menus?category={{#getEncodedValue this.Name}}{{/getEncodedValue}}">
+        <div class="single-image-gallery">
+          <div class="card">
+            <div class="card-body1 align-items-center">
+              <center><img src="/images/category-images/{{this._id}}.png" style="width: 50px; border-radius: 10px;">
+                <div class="card-content mt-2">
+                  <h6 class="textreducer mb-2">{{#getTitleCase this.Name}}{{/getTitleCase}}</h6>
+              </center>
+            </div>
+          </div>
+        </div>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+
+
+
+  <div class="container">
+
+    <div class="shop-pagination pb-3 mt-4">
+      <div class="card">
+        <div class="card-body p-2">
+          <div class="d-flex align-items-center justify-content-between"><small class="ms-1">
+              <div class="gallery-menu">
+                <button class="active btn btn-primary btn-sm" data-filter="*">All</button>
+                {{#each maincat}}
+                <button class="btn btn-primary btn-sm"
+                  data-filter=".{{#getSmallerCase this.Name}}{{/getSmallerCase}}">{{#getTitleCase
+                  this.Name}}{{/getTitleCase}}</button>
+                {{/each}}
+              </div>
+            </small>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery Wrapper-->
+    <div class="gallery-wrapper row g-3">
+
+
+      <div class="top-products-area">
+        <div class="container">
+          <div class="row g-3">
+
+
+            {{#each limit20products }}
+
+            <div class="col-6 col-sm-4 col-md-3 single-image-gallery {{this.Type}}">
+              <div class="card position-relative shadow-sm"><a href="/single-product/:{{this._id}}"><img
+                    class="card-img-top" src="/images/product-images/{{this._id}}.png" alt=""></a><span
+                  class="badge bg-warning text-dark position-absolute card-badge">{{this.Type}}</span>
+                <div class="card-body"> <a class="product-title d-block text-truncate"
+                    href="/single-product/:{{this._id}}"
+                    style="font-size: 1.125rem;color: #1f0757;margin-top: 0.75rem;font-weight: 500;margin-bottom: 0.25rem;">{{#getTitleCase
+                    this.Name}}{{/getTitleCase}}</a>
+                  <p class="sale-price" style="font-size: 1.25rem;line-height: 1;color: #0134d4;font-weight: 500;">
+                    ₹{{this.Offer}}<span
+                      style="font-size: 1rem;margin-left: 0.25rem;text-decoration: line-through;color: #ea4c62;">₹{{this.Price}}</span>
+                  </p>
+                  <button class="btn btn-primary btn-sm" onclick="addToCart('{{this._id}}')">
+                    Add to Bag
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {{/each}}
+
+
+
+
+
+            <!-- Single Top Product Card-->
+            {{!-- <div class="col-6 col-sm-4 col-lg-3 single-image-gallery {{this.Type}}">
+              <div class="card single-product-card">
+                <div class="card-body p-3">
+                  <!-- Product Thumbnail--><a class="product-thumbnail d-block"
+                    href="/single-product/:{{this._id}}"><img src="" alt="">
+                    <!-- Badge--><span class="badge bg-primary">{{this.Type}}</span></a>
+                  <!-- Product Title--><a class="product-title d-block text-truncate"
+                    href="/single-product/:{{this._id}}">{{#getTitleCase this.Name}}{{/getTitleCase}}</a>
+                  <!-- Product Price-->
+
+                  <p class="sale-price">₹{{this.Offer}}<span>₹{{this.Price}}</span></p>
+
+                  <button class="btn btn-primary btn-sm" onclick="addToCart('{{this._id}}')">
+                    Add to Bag
+                  </button>
+                </div>
+              </div>
+            </div> --}}
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <br>
+    <center> <a class="btn btn-outline-info w-100" href="/menu">View More</a></center>
+
+  </div>
+
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    {{!-- TODO --}}
+    <div class="modal-content">
+      <div class="modal-header"
+        style="border-radius: 10px; background-color:#205e54; border: 1px solid #ffffff00; margin-top:20px;">
+        <h3 class="text-white"><b>Login to unlock <br>
+            Awesome Benefits</b></h3>
+        <span class="close" style="color:rgb(247, 247, 247);">&times;</span>
+
+      </div>
+      <p class="text-white" style="margin-left: 20px;">It hardly takes only 10 seconds!</p>
+
+
+
+      <div class="modal-body">
+        <div class="card1">
+          <img src="img/icons/im1.png" alt="Card Image">
+          <div class="card-text">
+            <h6 class="text-black">Easy Ordering</h6>
+          </div>
+        </div>
+        <div class="card1">
+          <img src="img/icons/im2.png" alt="Card Image">
+          <div class="card-text">
+            <h6 class="text-black">Track Your Orders</h6>
+
+          </div>
+        </div>
+        <a href="/signin" class="btn black-button">Login</a>
+      </div>
+    </div>
+    {{!-- TODO --}}
+
+  </div>
+
+
+  <br><br>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"
+    integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+
+    //on page open set timeout
+    $(document).ready(function () {
+      setTimeout(function () {
+        $('#myModal').css('display', 'block');
+      }, 5000);
+    });
+
+    $('#product-carousel').owlCarousel({
+      loop: true,
+
+      dots: false,
+      margin: 10,
+      nav: false,
+      responsive: {
+        0: {
+          items: 2
+        },
+        600: {
+          items: 3
+        },
+        1000: {
+          items: 5
+        }
+      }
+    });
+    $('#menu-carousel').owlCarousel({
+      loop: true,
+      dots: false,
+      margin: 10,
+      nav: false,
+      responsive: {
+        0: {
+          items: 3
+        },
+        600: {
+          items: 3
+        },
+        1000: {
+          items: 5
+        }
+      }
+    });
+    $('#hero-carousel').owlCarousel({
+      loop: true,
+
+      dots: false,
+      margin: 10,
+      nav: false,
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 1
+        },
+        1000: {
+          items: 1
+        }
+      }
+    });
+
+    function addToCart(productId) {
+      $.ajax({
+        url: "/add-to-cart/" + productId,
+        method: "get",
+        success: (response) => {
+          if (response.status) {
+
+            Swal.fire({
+              toast: true,
+              icon: 'success',
+              customClass: 'my',
+              title: response.message,
+              animation: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 3000,
+              iconColor: "#fff",
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            let count = $("#cart-count").html();
+            count = parseInt(count) + 1;
+            $("#cart-count").html(count);
+          } else {
+            Swal.fire({
+              toast: true,
+              icon: 'error',
+              title: response.message,
+              animation: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 3000,
+              iconColor: "#fff",
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            window.location = "/signin";
+          }
+        },
+      });
+    }
+    var modal = document.getElementById("myModal");
+
+
+
+    //timer then open modal 
+    setTimeout(function () { modal.style.display = "block"; }, 2000);
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal 
+
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
